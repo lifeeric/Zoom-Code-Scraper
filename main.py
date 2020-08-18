@@ -34,8 +34,8 @@ response = requests.get(
     'ghtedLabel', headers=HEADERS
 )
 
-for i in response.json()['globalObjects']['tweets'].values():
-    content = i['full_text']
+for tweet in response.json()['globalObjects']['tweets'].values():
+    content = tweet['full_text']
     if any(i in content for i in ['pass', 'code', 'raid', 'join']) and all(
         i not in content for i in ['#', '@']
     ):
@@ -47,7 +47,7 @@ for i in response.json()['globalObjects']['tweets'].values():
         scraped += 1
 
     try:
-        url = i['entities']['urls'][0]['expanded_url']
+        url = tweet['entities']['urls'][0]['expanded_url']
     except Exception:
         continue
     if 'us04web.zoom.us' in url and '?pwd=' in url:
