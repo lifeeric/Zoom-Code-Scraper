@@ -51,13 +51,18 @@ for i in response.json()['globalObjects']['tweets'].values():
     except Exception:
         continue
     if 'us04web.zoom.us' in url and '?pwd=' in url:
-        save(f'URL: {url}')
+        save(
+            '[URL]\n'
+            f'{url}\n'
+            '----------------------------------'
+        )
         scraped += 1
     elif 'us04web.zoom.us' in url and '?pwd=' not in url:
         save(
             '[URL AND TEXT]\n'
             f'URL: {url}\n'
-            f'TEXT: {content}'
+            f'TEXT: {content}\n'
+            '----------------------------------'
         )
         scraped += 1
 
